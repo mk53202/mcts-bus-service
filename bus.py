@@ -9,7 +9,7 @@ bus_stop_id = "4350" # Ouside 411
 url_stop = "http://realtime.ridemcts.com/bustime/api/v1/getstops"
 
 querystring = {
-	"key":"t382wyxkgmUYuASFYtVPCRaJK",
+	"key":"API_KEY",
 	"format":"json",
 	"stpid":bus_stop_id
 }
@@ -30,7 +30,7 @@ bus_stop = (lat, lon)
 url = "http://realtime.ridemcts.com/bustime/api/v1/getvehicles"
 
 querystring = {
-    "key":"t382wyxkgmUYuASFYtVPCRaJK",
+    "key":"API_KEY",
     "format":"json",
     "rt":"14"
 }

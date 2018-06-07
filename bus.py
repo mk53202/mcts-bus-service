@@ -1,22 +1,22 @@
 import requests
 import json
 import xmltodict
+import os
 from geopy.distance import vincenty
 
-bus_stop_id = "4350" # Ouside 411
-#bus_stop_id = "4471" # Humboldt and Brady
+#bus_stop_id = "4350" # Ouside 411
+bus_stop_id = "4471" # Humboldt and Brady
 
 url_stop = "http://realtime.ridemcts.com/bustime/api/v1/getstops"
 
 querystring = {
-	"key":"API_KEY",
+	"key":os.environ['BUSTIME_API_KEY'],
 	"format":"json",
 	"stpid":bus_stop_id
 }
 
 headers = {
 	'cache-control': "no-cache",
-	'postman-token': "50682994-3eca-5be9-363e-f974a0fdc646"
 }
 
 response = requests.request("GET", url_stop, headers=headers, params=querystring)
@@ -30,7 +30,7 @@ bus_stop = (lat, lon)
 url = "http://realtime.ridemcts.com/bustime/api/v1/getvehicles"
 
 querystring = {
-    "key":"API_KEY",
+    "key":"t382wyxkgmUYuASFYtVPCRaJK",
     "format":"json",
     "rt":"14"
 }
@@ -41,7 +41,8 @@ headers = {
     }
 
 response = requests.request("GET", url, headers=headers, params=querystring)
-parsed_json = json.loads(response.text)
+
+print parsed_json
 
 for vehicle in parsed_json['bustime-response']['vehicle']:
 	source_bus = ( vehicle['lat'], vehicle['lon'] )

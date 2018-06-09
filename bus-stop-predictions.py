@@ -1,3 +1,4 @@
+from datetime import datetime
 import requests
 import json
 import xmltodict
@@ -8,7 +9,6 @@ url_api = "/bustime/api/v1/getpredictions"
 url_request = url_site + url_api
 bus_stops = '4471,4542,1417,1327'
 bus_predictions = '4'
-# bus_predictions = ''
 
 querystring = {
 	"key": os.environ['BUSTIME_API_KEY'],
@@ -27,11 +27,8 @@ json_response = json.dumps(dict_response['bustime-response'],
 
 # print "JSON:\n" + json_response
 
-# print "JSON_PARSED:\n"
 json_parsed = json.loads(json_response)
 for line in json_parsed['prd']:
-	print line['rt'] + " -> " + line['des'] + " - " + line['prdtm']
-
-# ['des']
-# for destination in json_response:
-# 	print destination.['des']
+	parsed_datetime = datetime.strptime(line['prdtm'], '%Y%m%d %H:%M')
+	formatted_datetime = datetime.strftime(parsed_datetime, '%I:%M %p')
+	print line['rt'] + "->" + line['des'] + "\t- " + str(formatted_datetime)

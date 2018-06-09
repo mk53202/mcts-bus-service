@@ -6,7 +6,7 @@ import os
 url_site = "http://realtime.ridemcts.com"
 url_api = "/bustime/api/v1/getstops"
 url_request = url_site + url_api
-bus_routes = '14'
+bus_routes = 'GRE'
 bus_direction = 'NORTH'
 querystring = {
 	"key": os.environ['BUSTIME_API_KEY'],

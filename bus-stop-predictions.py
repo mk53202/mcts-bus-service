@@ -25,10 +25,8 @@ dict_response = xmltodict.parse(response.text)
 json_response = json.dumps(dict_response['bustime-response'],
 							sort_keys=True,indent=4, separators=(',', ': '))
 
-# print "JSON:\n" + json_response
-
 json_parsed = json.loads(json_response)
-for line in json_parsed['prd']:
-	parsed_datetime = datetime.strptime(line['prdtm'], '%Y%m%d %H:%M')
+for bus in json_parsed['prd']:
+	parsed_datetime = datetime.strptime(bus['prdtm'], '%Y%m%d %H:%M')
 	formatted_datetime = datetime.strftime(parsed_datetime, '%I:%M %p')
-	print line['rt'] + "->" + line['des'] + "\t- " + str(formatted_datetime)
+	print bus['rt'] + "->" + bus['des'] + "\t- " + str(formatted_datetime)
